@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
+	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" 
+	xmlns:tns="http://www.ttu.ee/idu0075/ws/laenutus" 
+	targetNamespace="http://www.ttu.ee/idu0075/ws/laenutus">
+	<wsdl:types>
+		<xs:schema  targetNamespace="http://www.ttu.ee/idu0075/ws/laenutus" elementFormDefault="qualified">
+
+      <xs:simpleType name="isbnType">
+        <xs:restriction base="xs:integer">
+          <xs:pattern value="\d{13}"/>
+        </xs:restriction>
+      </xs:simpleType>
+
+	  
+      <xs:complexType name ="raamatType">
+				<xs:sequence>
+					<xs:element name="id" type="xs:integer"/>
+					<xs:element name="isbn" type="tns:isbnType"/>
+					<xs:element name="pealkiri" type="xs:string"/>
+					<xs:element name="genre" type="xs:string"/>
+					<xs:element name="autor" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name ="laenutusRaamatType">
+				<xs:sequence>
+					<xs:element name="raamat" type="tns:raamatType"/>
+					<xs:element name="viivis" type="xs:double"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name ="laenutusRaamatListType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="laenutusRaamat" type="tns:laenutusRaamatType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name ="laenutusType">
+				<xs:sequence>
+					<xs:element name="id" type="xs:integer"/>
+					<xs:element name="laenutusNo" type="xs:int"/>
+					<xs:element name="laenutusAlgus" type="xs:date"/>
+					<xs:element name="laenutusLõpp" type="xs:date"/>
+					<xs:element name="päeviÜle" type="xs:int"/>
+					<xs:element name="viivis" type="xs:double"/>
+					<xs:element name="laenutajaNimi" type="xs:string"/>
+					<xs:element name="laenutusRaamatList" type="tns:laenutusRaamatListType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="getRaamatRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="id" type="xs:integer"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getRaamatResponse" type="tns:raamatType"/>
+			<xs:element name="addRaamatRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="pealkiri" type="xs:string"/>
+						<xs:element name="autor" type="xs:string"/>
+						<xs:element name="genre" type="xs:string"/>						
+						<xs:element name="isbn" type="tns:isbnType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="addRaamatResponse" type="tns:raamatType"/>
+			<xs:element name="getRaamatListRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element minOccurs="0" maxOccurs="1" name="autor" type="xs:string"/>
+						
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getRaamatListResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" maxOccurs="unbounded" name="raamat" type="tns:raamatType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getLaenutusRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="id" type="xs:integer"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getLaenutusResponse" type="tns:laenutusType"/>
+			<xs:element name="addLaenutusRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="laenutusNo" type="xs:int"/>
+						<xs:element name="laenutusAlgus" type="xs:date"/>
+						<xs:element name="laenutusLõpp" type="xs:date"/>
+						<xs:element name="laenutajaNimi" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="addLaenutusResponse" type="tns:laenutusType"/>
+			<xs:element name="getLaenutusListRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="päeviÜle" type="xs:int"/>
+						<xs:element name="viivisFrom" type="xs:double"/>
+						<xs:element name="laenutusNoRangeFrom" type="xs:int"/>
+						<xs:element name="laenutusNoRangeTo" type="xs:int"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getLaenutusListResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" maxOccurs="unbounded" name="Laenutus" type="tns:laenutusType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getLaenutusRaamatListRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="laenutusId" type="xs:integer"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getLaenutusRaamatListResponse" type="tns:laenutusRaamatListType"/>
+			<xs:element name="addLaenutusRaamatRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="laenutusId" type="xs:integer"/>
+						<xs:element name="raamatId" type="xs:integer"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="addLaenutusRaamatResponse" type="tns:laenutusRaamatType"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="getRaamatMessageRequest">
+		<wsdl:part name="parameter" element="tns:getRaamatRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getRaamatMessageResponse">
+		<wsdl:part name="parameter" element="tns:getRaamatResponse"/>
+	</wsdl:message>
+	<wsdl:message name="addRaamatMessageRequest">
+		<wsdl:part name="parameter" element="tns:addRaamatRequest"/>
+	</wsdl:message>
+	<wsdl:message name="addRaamatMessageResponse">
+		<wsdl:part name="parameter" element="tns:addRaamatResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getRaamatListMessageRequest">
+		<wsdl:part name="parameter" element="tns:getRaamatListRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getRaamatListMessageResponse">
+		<wsdl:part name="parameter" element="tns:getRaamatListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getLaenutusMessageRequest">
+		<wsdl:part name="parameter" element="tns:getLaenutusRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getLaenutusMessageResponse">
+		<wsdl:part name="parameter" element="tns:getLaenutusResponse"/>
+	</wsdl:message>
+	<wsdl:message name="addLaenutusMessageRequest">
+		<wsdl:part name="parameter" element="tns:addLaenutusRequest"/>
+	</wsdl:message>
+	<wsdl:message name="addLaenutusMessageResponse">
+		<wsdl:part name="parameter" element="tns:addLaenutusResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getLaenutusListMessageRequest">
+		<wsdl:part name="parameter" element="tns:getLaenutusListRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getLaenutusListMessageResponse">
+		<wsdl:part name="parameter" element="tns:getLaenutusListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getLaenutusRaamatListMessageRequest">
+		<wsdl:part name="parameter" element="tns:getLaenutusRaamatListRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getLaenutusRaamatListMessageResponse">
+		<wsdl:part name="parameter" element="tns:getLaenutusRaamatListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="addLaenutusRaamatMessageRequest">
+		<wsdl:part name="parameter" element="tns:addLaenutusRaamatRequest"/>
+	</wsdl:message>
+	<wsdl:message name="addLaenutusRaamatMessageResponse">
+		<wsdl:part name="parameter" element="tns:addLaenutusRaamatResponse"/>
+	</wsdl:message>
+	<wsdl:portType name="LaenutusPortType">
+		<wsdl:operation name="getRaamat">
+			<wsdl:input message="tns:getRaamatMessageRequest"/>
+			<wsdl:output message="tns:getRaamatMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="addRaamat">
+			<wsdl:input message="tns:addRaamatMessageRequest"/>
+			<wsdl:output message="tns:addRaamatMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getRaamatList">
+			<wsdl:input message="tns:getRaamatListMessageRequest"/>
+			<wsdl:output message="tns:getRaamatListMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getLaenutus">
+			<wsdl:input message="tns:getLaenutusMessageRequest"/>
+			<wsdl:output message="tns:getLaenutusMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="addLaenutus">
+			<wsdl:input message="tns:addLaenutusMessageRequest"/>
+			<wsdl:output message="tns:addLaenutusMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getLaenutusList">
+			<wsdl:input message="tns:getLaenutusListMessageRequest"/>
+			<wsdl:output message="tns:getLaenutusListMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getLaenutusRaamatList">
+			<wsdl:input message="tns:getLaenutusRaamatListMessageRequest"/>
+			<wsdl:output message="tns:getLaenutusRaamatListMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="addLaenutusRaamat">
+			<wsdl:input message="tns:addLaenutusRaamatMessageRequest"/>
+			<wsdl:output message="tns:addLaenutusRaamatMessageResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="LaenutusBinding" type="tns:LaenutusPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="getRaamat">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="addRaamat">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getRaamatList">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>	
+		<wsdl:operation name="getLaenutus">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="addLaenutus">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getLaenutusList">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>	
+		<wsdl:operation name="getLaenutusRaamatList">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="addLaenutusRaamat">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="LaenutusService">
+		<wsdl:port name="LaenutusPort" binding="tns:LaenutusBinding">
+			<soap:address location="Empty"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

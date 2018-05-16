@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="df8f93ff-2a9f-4faf-9282-1bbcfd594c7d" activeEnvironment="Default" name="LaenutusService" soapui-version="5.4.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="5b7fb8a7-7f6f-49ad-af5a-adcf557b69b9" wsaVersion="NONE" name="LaenutusBinding" type="wsdl" bindingName="{http://www.ttu.ee/idu0075/ws/laenutus}LaenutusBinding" soapVersion="1_1" anonymous="optional" definition="http://DESKTOP-QMF9D1U:8080/LaenutusWebApplication/LaenutusService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://DESKTOP-QMF9D1U:8080/LaenutusWebApplication/LaenutusService?wsdl"><con:part><con:url>http://DESKTOP-QMF9D1U:8080/LaenutusWebApplication/LaenutusService?wsdl</con:url><con:content><![CDATA[<!--Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown.-->
+<wsdl:definitions targetNamespace="http://www.ttu.ee/idu0075/ws/laenutus" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.ttu.ee/idu0075/ws/laenutus">
+  <wsdl:types>
+    <xs:schema targetNamespace="http://www.ttu.ee/idu0075/ws/laenutus" elementFormDefault="qualified">
+      <xs:simpleType name="isbnType">
+        <xs:restriction base="xs:integer">
+          <xs:pattern value="\d{13}"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:complexType name="raamatType">
+        <xs:sequence>
+          <xs:element name="id" type="xs:integer"/>
+          <xs:element name="isbn" type="tns:isbnType"/>
+          <xs:element name="pealkiri" type="xs:string"/>
+          <xs:element name="genre" type="xs:string"/>
+          <xs:element name="autor" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="laenutusRaamatType">
+        <xs:sequence>
+          <xs:element name="raamat" type="tns:raamatType"/>
+          <xs:element name="viivis" type="xs:double"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="laenutusRaamatListType">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="laenutusRaamat" type="tns:laenutusRaamatType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="laenutusType">
+        <xs:sequence>
+          <xs:element name="id" type="xs:integer"/>
+          <xs:element name="laenutusNo" type="xs:int"/>
+          <xs:element name="laenutusAlgus" type="xs:date"/>
+          <xs:element name="laenutusLõpp" type="xs:date"/>
+          <xs:element name="päeviÜle" type="xs:int"/>
+          <xs:element name="viivis" type="xs:double"/>
+          <xs:element name="laenutajaNimi" type="xs:string"/>
+          <xs:element name="laenutusRaamatList" type="tns:laenutusRaamatListType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getRaamatRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="id" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getRaamatResponse" type="tns:raamatType"/>
+      <xs:element name="addRaamatRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="pealkiri" type="xs:string"/>
+            <xs:element name="autor" type="xs:string"/>
+            <xs:element name="genre" type="xs:string"/>
+            <xs:element name="isbn" type="tns:isbnType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addRaamatResponse" type="tns:raamatType"/>
+      <xs:element name="getRaamatListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element minOccurs="0" maxOccurs="1" name="autor" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getRaamatListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="raamat" type="tns:raamatType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getLaenutusRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="id" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getLaenutusResponse" type="tns:laenutusType"/>
+      <xs:element name="addLaenutusRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="laenutusNo" type="xs:int"/>
+            <xs:element name="laenutusAlgus" type="xs:date"/>
+            <xs:element name="laenutusLõpp" type="xs:date"/>
+            <xs:element name="laenutajaNimi" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addLaenutusResponse" type="tns:laenutusType"/>
+      <xs:element name="getLaenutusListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="päeviÜle" type="xs:int"/>
+            <xs:element name="viivisFrom" type="xs:double"/>
+            <xs:element name="laenutusNoRangeFrom" type="xs:int"/>
+            <xs:element name="laenutusNoRangeTo" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getLaenutusListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="Laenutus" type="tns:laenutusType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getLaenutusRaamatListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="laenutusId" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getLaenutusRaamatListResponse" type="tns:laenutusRaamatListType"/>
+      <xs:element name="addLaenutusRaamatRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="laenutusId" type="xs:integer"/>
+            <xs:element name="raamatId" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addLaenutusRaamatResponse" type="tns:laenutusRaamatType"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getRaamatMessageRequest">
+    <wsdl:part name="parameter" element="tns:getRaamatRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getRaamatMessageResponse">
+    <wsdl:part name="parameter" element="tns:getRaamatResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addRaamatMessageRequest">
+    <wsdl:part name="parameter" element="tns:addRaamatRequest"/>
+  </wsdl:message>
+  <wsdl:message name="addRaamatMessageResponse">
+    <wsdl:part name="parameter" element="tns:addRaamatResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getRaamatListMessageRequest">
+    <wsdl:part name="parameter" element="tns:getRaamatListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getRaamatListMessageResponse">
+    <wsdl:part name="parameter" element="tns:getRaamatListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getLaenutusMessageRequest">
+    <wsdl:part name="parameter" element="tns:getLaenutusRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getLaenutusMessageResponse">
+    <wsdl:part name="parameter" element="tns:getLaenutusResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addLaenutusMessageRequest">
+    <wsdl:part name="parameter" element="tns:addLaenutusRequest"/>
+  </wsdl:message>
+  <wsdl:message name="addLaenutusMessageResponse">
+    <wsdl:part name="parameter" element="tns:addLaenutusResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getLaenutusListMessageRequest">
+    <wsdl:part name="parameter" element="tns:getLaenutusListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getLaenutusListMessageResponse">
+    <wsdl:part name="parameter" element="tns:getLaenutusListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getLaenutusRaamatListMessageRequest">
+    <wsdl:part name="parameter" element="tns:getLaenutusRaamatListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getLaenutusRaamatListMessageResponse">
+    <wsdl:part name="parameter" element="tns:getLaenutusRaamatListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addLaenutusRaamatMessageRequest">
+    <wsdl:part name="parameter" element="tns:addLaenutusRaamatRequest"/>
+  </wsdl:message>
+  <wsdl:message name="addLaenutusRaamatMessageResponse">
+    <wsdl:part name="parameter" element="tns:addLaenutusRaamatResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="LaenutusPortType">
+    <wsdl:operation name="getRaamat">
+      <wsdl:input message="tns:getRaamatMessageRequest"/>
+      <wsdl:output message="tns:getRaamatMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="addRaamat">
+      <wsdl:input message="tns:addRaamatMessageRequest"/>
+      <wsdl:output message="tns:addRaamatMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getRaamatList">
+      <wsdl:input message="tns:getRaamatListMessageRequest"/>
+      <wsdl:output message="tns:getRaamatListMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getLaenutus">
+      <wsdl:input message="tns:getLaenutusMessageRequest"/>
+      <wsdl:output message="tns:getLaenutusMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="addLaenutus">
+      <wsdl:input message="tns:addLaenutusMessageRequest"/>
+      <wsdl:output message="tns:addLaenutusMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getLaenutusList">
+      <wsdl:input message="tns:getLaenutusListMessageRequest"/>
+      <wsdl:output message="tns:getLaenutusListMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getLaenutusRaamatList">
+      <wsdl:input message="tns:getLaenutusRaamatListMessageRequest"/>
+      <wsdl:output message="tns:getLaenutusRaamatListMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="addLaenutusRaamat">
+      <wsdl:input message="tns:addLaenutusRaamatMessageRequest"/>
+      <wsdl:output message="tns:addLaenutusRaamatMessageResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="LaenutusBinding" type="tns:LaenutusPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getRaamat">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addRaamat">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRaamatList">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLaenutus">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addLaenutus">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLaenutusList">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLaenutusRaamatList">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addLaenutusRaamat">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="LaenutusService">
+    <wsdl:port name="LaenutusPort" binding="tns:LaenutusBinding">
+      <soap:address location="http://DESKTOP-QMF9D1U:8080/LaenutusWebApplication/LaenutusService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://DESKTOP-QMF9D1U:8080/LaenutusWebApplication/LaenutusService</con:endpoint></con:endpoints><con:operation id="fd68e8c0-1b2e-4b74-b742-8185c010adbb" isOneWay="false" action="" name="addLaenutus" bindingOperationName="addLaenutus" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="65cad6ba-e857-4333-92b1-22fde5e423cb" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://DESKTOP-QMF9D1U:8080/LaenutusWebApplication/LaenutusService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:laen="http://www.ttu.ee/idu0075/ws/laenutus">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <laen:addLaenutusRequest>\r
+         <laen:token>?</laen:token>\r
+         <laen:laenutusNo>?</laen:laenutusNo>\r
+         <laen:laenutusAlgus>?</laen:laenutusAlgus>\r
+         <laen:laenutusLõpp>?</laen:laenutusLõpp>\r
+         <laen:laenutajaNimi>?</laen:laenutajaNimi>\r
+      </laen:addLaenutusRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/ws/laenutus/LaenutusPortType/addLaenutusRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="f1bf70a8-9e6a-46c6-9d84-fdbfe65ea2b1" isOneWay="false" action="" name="addLaenutusRaamat" bindingOperationName="addLaenutusRaamat" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="ced1b558-5292-4fc3-b1de-cd86bf976ca3" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://DESKTOP-QMF9D1U:8080/LaenutusWebApplication/LaenutusService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:laen="http://www.ttu.ee/idu0075/ws/laenutus">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <laen:addLaenutusRaamatRequest>\r
+         <laen:token>salajane</laen:token>\r
+         <laen:laenutusId>2</laen:laenutusId>\r
+         <laen:raamatId>1</laen:raamatId>\r
+      </laen:addLaenutusRaamatRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/ws/laenutus/LaenutusPortType/addLaenutusRaamatRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="767d76a1-44a0-426a-b1e4-220c497ad25e" isOneWay="false" action="" name="addRaamat" bindingOperationName="addRaamat" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="094c2c15-54cd-4c0e-9c74-c62b547dcf3a" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://DESKTOP-QMF9D1U:8080/LaenutusWebApplication/LaenutusService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:laen="http://www.ttu.ee/idu0075/ws/laenutus">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <laen:addRaamatRequest>\r
+         <laen:token>?</laen:token>\r
+         <laen:pealkiri>?</laen:pealkiri>\r
+         <laen:autor>?</laen:autor>\r
+         <laen:genre>?</laen:genre>\r
+         <laen:isbn>?</laen:isbn>\r
+      </laen:addRaamatRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/ws/laenutus/LaenutusPortType/addRaamatRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="655df1eb-3e45-4ca1-b02b-d56af1ef2a49" isOneWay="false" action="" name="getLaenutus" bindingOperationName="getLaenutus" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="3a44ee0d-a6a4-4268-996f-df0c71cce1d4" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://DESKTOP-QMF9D1U:8080/LaenutusWebApplication/LaenutusService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:laen="http://www.ttu.ee/idu0075/ws/laenutus">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <laen:getLaenutusRequest>\r
+         <laen:token>salajane</laen:token>\r
+         <laen:id>1</laen:id>\r
+      </laen:getLaenutusRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/ws/laenutus/LaenutusPortType/getLaenutusRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="d47924ab-98f1-47ea-b358-361d72e7642c" isOneWay="false" action="" name="getLaenutusList" bindingOperationName="getLaenutusList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c10b117b-a193-41f8-b5f0-587deb09e431" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://DESKTOP-QMF9D1U:8080/LaenutusWebApplication/LaenutusService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:laen="http://www.ttu.ee/idu0075/ws/laenutus">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <laen:getLaenutusListRequest>\r
+         <laen:token>salajane</laen:token>\r
+         <laen:päeviÜle>1</laen:päeviÜle>\r
+         <laen:viivisFrom>3</laen:viivisFrom>\r
+         <laen:laenutusNoRangeFrom>1</laen:laenutusNoRangeFrom>\r
+         <laen:laenutusNoRangeTo>200</laen:laenutusNoRangeTo>\r
+      </laen:getLaenutusListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/ws/laenutus/LaenutusPortType/getLaenutusListRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="3b1c6aef-3312-4e2f-83c3-6c6f1f6ffec8" isOneWay="false" action="" name="getLaenutusRaamatList" bindingOperationName="getLaenutusRaamatList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f78629be-36a4-4640-ba2c-c41957cf0ee8" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://DESKTOP-QMF9D1U:8080/LaenutusWebApplication/LaenutusService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:laen="http://www.ttu.ee/idu0075/ws/laenutus">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <laen:getLaenutusRaamatListRequest>\r
+         <laen:token>salajane</laen:token>\r
+         <laen:laenutusId>2</laen:laenutusId>\r
+      </laen:getLaenutusRaamatListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/ws/laenutus/LaenutusPortType/getLaenutusRaamatListRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="d7ee1f60-e6f6-413b-bd10-00ed77006a88" isOneWay="false" action="" name="getRaamat" bindingOperationName="getRaamat" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="4cac1e0d-21f3-497a-9fe3-1445a3fbc02e" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://DESKTOP-QMF9D1U:8080/LaenutusWebApplication/LaenutusService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:laen="http://www.ttu.ee/idu0075/ws/laenutus">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <laen:getRaamatRequest>\r
+         <laen:token>salajane</laen:token>\r
+         <laen:id>2</laen:id>\r
+      </laen:getRaamatRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/ws/laenutus/LaenutusPortType/getRaamatRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="52e12c91-53df-4f2e-971f-4af5261144f6" isOneWay="false" action="" name="getRaamatList" bindingOperationName="getRaamatList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="87ab222b-1383-4f74-92db-3c77c76048e5" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://DESKTOP-QMF9D1U:8080/LaenutusWebApplication/LaenutusService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:laen="http://www.ttu.ee/idu0075/ws/laenutus">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <laen:getRaamatListRequest>\r
+         <laen:token>salajane</laen:token>\r
+         <!--Optional:-->\r
+         <laen:autor>J.K.Rowling</laen:autor>\r
+      </laen:getRaamatListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/ws/laenutus/LaenutusPortType/getRaamatListRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="6b4f0eb5-1f80-4a88-8428-d4233abdf2e2" name="LaenutusBinding TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="b3201abe-6169-46bf-b5ea-09cef5efd200" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="LaenutusBinding TestSuite" searchProperties="true"><con:settings/><con:testStep type="request" id="d33c0d9d-8320-4009-a4b8-03349f188b94" name="addLaenutus"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>LaenutusBinding</con:interface><con:operation>addLaenutus</con:operation><con:request name="addLaenutus" id="f0ac45c3-6cdc-4ca5-a829-e23dc567a5d4"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://DESKTOP-QMF9D1U:8080/LaenutusWebApplication/LaenutusService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:laen="http://www.ttu.ee/idu0075/ws/laenutus">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <laen:addLaenutusRequest>\r
+         <laen:token>salajane</laen:token>\r
+         <laen:laenutusNo>12</laen:laenutusNo>\r
+         <laen:laenutusAlgus>2018-04-08</laen:laenutusAlgus>\r
+         <laen:laenutusLõpp>2018-04-30</laen:laenutusLõpp>\r
+         <laen:laenutajaNimi>Sasha</laen:laenutajaNimi>\r
+      </laen:addLaenutusRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="d147602f-3c18-413d-9e88-cdf27818a4b6" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Simple Contains" id="43c15143-1d7e-4162-84e5-f94d0de87cd5" name="Contains"><con:configuration><token>&lt;laenutajaNimi>Sasha&lt;/laenutajaNimi>
+</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="SOAP Response" id="ad6cc76c-8b6c-4043-93ff-d36147fdcd11" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://www.ttu.ee/idu0075/ws/laenutus/LaenutusPortType/addLaenutusRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="5a50314d-93af-4dd7-9f3a-89d922532d43" name="addRaamat"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>LaenutusBinding</con:interface><con:operation>addRaamat</con:operation><con:request name="addRaamat" id="77658438-bf38-49a8-8a16-afebc32e0882"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://DESKTOP-QMF9D1U:8080/LaenutusWebApplication/LaenutusService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:laen="http://www.ttu.ee/idu0075/ws/laenutus">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <laen:addRaamatRequest>\r
+         <laen:token>salajane</laen:token>\r
+         <laen:pealkiri>Hairy Potter</laen:pealkiri>\r
+         <laen:autor>J.K.Rowling</laen:autor>\r
+         <laen:genre>Fantaasia</laen:genre>\r
+         <laen:isbn>9780545010221</laen:isbn>\r
+      </laen:addRaamatRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>
+]]></con:request><con:assertion type="Simple Contains" id="3cfa8d19-f3f6-4893-b807-cf4e40b2bbda" name="Contains"><con:configuration><token>&lt;pealkiri>Hairy Potter&lt;/pealkiri>
+</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Schema Compliance" id="a95b12d2-72d5-4ce7-abf2-f6f5e7e3db05" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="SOAP Response" id="1bcbd569-d1b2-4fd7-a1c9-23e9187fa50c" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://www.ttu.ee/idu0075/ws/laenutus/LaenutusPortType/addRaamatRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="3ad675e8-c503-4084-b559-10a28e696742" name="getLaenutus"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>LaenutusBinding</con:interface><con:operation>getLaenutus</con:operation><con:request name="getLaenutus" id="be190efc-cf8f-4a61-be36-087acc73d04f"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://DESKTOP-QMF9D1U:8080/LaenutusWebApplication/LaenutusService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:laen="http://www.ttu.ee/idu0075/ws/laenutus">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <laen:getLaenutusRequest>\r
+         <laen:token>salajane</laen:token>\r
+         <laen:id>1</laen:id>\r
+      </laen:getLaenutusRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="bf60ad0a-c3c4-4b91-99f7-666ffdc888ea" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Simple Contains" id="b5f10841-4d1d-4c09-95cf-9c2ff3544f27" name="Contains"><con:configuration><token>&lt;laenutajaNimi>sasha&lt;/laenutajaNimi>
+</token><ignoreCase>true</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="SOAP Response" id="70ff3194-c9e5-4e03-a169-c8c11922ab20" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://www.ttu.ee/idu0075/ws/laenutus/LaenutusPortType/getLaenutusRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="acdad023-3da4-49f9-86c8-84dbcffaf330" name="getLaenutusList"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>LaenutusBinding</con:interface><con:operation>getLaenutusList</con:operation><con:request name="getLaenutusList" id="6d409e1d-be3d-45c1-b51e-9cb2b4e10d68"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://DESKTOP-QMF9D1U:8080/LaenutusWebApplication/LaenutusService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:laen="http://www.ttu.ee/idu0075/ws/laenutus">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <laen:getLaenutusListRequest>
+         <laen:token>salajane</laen:token>
+         <laen:päeviÜle>1</laen:päeviÜle>
+         <laen:viivisFrom>3</laen:viivisFrom>
+         <laen:laenutusNoRangeFrom>1</laen:laenutusNoRangeFrom>
+         <laen:laenutusNoRangeTo>200</laen:laenutusNoRangeTo>
+      </laen:getLaenutusListRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="Simple Contains" id="fa4b1a6d-1785-460f-bb59-d48c93b524bb" name="Contains"><con:configuration><token>&lt;laenutajaNimi>Sasha&lt;/laenutajaNimi>
+</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Schema Compliance" id="15efad81-0cb4-4710-a846-4087cc586c2c" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="SOAP Response" id="8aed89c3-babe-4706-92e4-3c7f5efecb0e" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://www.ttu.ee/idu0075/ws/laenutus/LaenutusPortType/getLaenutusListRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="2aaaaad9-c592-44a3-ae48-7a92b1410f8f" name="addLaenutusRaamat"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>LaenutusBinding</con:interface><con:operation>addLaenutusRaamat</con:operation><con:request name="addLaenutusRaamat" id="47d0cdf7-1e5c-4488-a7f7-ffba5f838c93"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://DESKTOP-QMF9D1U:8080/LaenutusWebApplication/LaenutusService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:laen="http://www.ttu.ee/idu0075/ws/laenutus">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <laen:addLaenutusRaamatRequest>\r
+         <laen:token>salajane</laen:token>\r
+         <laen:laenutusId>1</laen:laenutusId>\r
+         <laen:raamatId>1</laen:raamatId>\r
+      </laen:addLaenutusRaamatRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Simple Contains" id="d1c1e823-7261-4e17-98c4-1002d83ccf64" name="Contains"><con:configuration><token>&lt;genre>Fantaasia&lt;/genre></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Schema Compliance" id="1b37e51e-26ec-466e-9001-32f7fa9a2779" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="SOAP Response" id="9c2f2ad0-4590-4d54-bee2-4c0293a372d4" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://www.ttu.ee/idu0075/ws/laenutus/LaenutusPortType/addLaenutusRaamatRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="ce1ebcdc-3ba6-405f-b1b2-4d8a32380c31" name="getLaenutusRaamatList"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>LaenutusBinding</con:interface><con:operation>getLaenutusRaamatList</con:operation><con:request name="getLaenutusRaamatList" id="ca222cf1-e267-49af-8566-2bf45736bc46"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://DESKTOP-QMF9D1U:8080/LaenutusWebApplication/LaenutusService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:laen="http://www.ttu.ee/idu0075/ws/laenutus">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <laen:getLaenutusRaamatListRequest>\r
+         <laen:token>salajane</laen:token>\r
+         <laen:laenutusId>2</laen:laenutusId>\r
+      </laen:getLaenutusRaamatListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Simple Contains" id="d8f72898-6fd8-4591-ab5f-b6a011f30448" name="Contains"><con:configuration><token>&lt;isbn>9780545010221&lt;/isbn>
+</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Schema Compliance" id="83374b49-a020-4282-9672-f4e9ca9da7c9" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="SOAP Response" id="0cc997cd-df58-4ee4-bc23-ba7e38b5a114" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://www.ttu.ee/idu0075/ws/laenutus/LaenutusPortType/getLaenutusRaamatListRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="eb42fce7-e12a-4b1a-af8b-194a33bc5b90" name="getRaamat"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>LaenutusBinding</con:interface><con:operation>getRaamat</con:operation><con:request name="getRaamat" id="5d9d5a28-ffdd-40d3-ab3a-0e1c9ef56327"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://DESKTOP-QMF9D1U:8080/LaenutusWebApplication/LaenutusService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:laen="http://www.ttu.ee/idu0075/ws/laenutus">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <laen:getRaamatRequest>\r
+         <laen:token>salajane</laen:token>\r
+         <laen:id>1</laen:id>\r
+      </laen:getRaamatRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Simple Contains" id="0e4e8496-a083-46cf-a27f-5bc1d3f01f71" name="Contains"><con:configuration><token>&lt;isbn>9780545010221&lt;/isbn>
+</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Schema Compliance" id="25d3e2b8-927a-40ac-a36b-36374790ae3a" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="SOAP Response" id="3516cf90-b69f-41cd-a6c0-e966ff4a3857" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://www.ttu.ee/idu0075/ws/laenutus/LaenutusPortType/getRaamatRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="76ba7266-da6c-4b3b-b400-416aa6ab51c2" name="getRaamatList"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>LaenutusBinding</con:interface><con:operation>getRaamatList</con:operation><con:request name="getRaamatList" id="620b1a9d-d78e-41df-9740-c39775097274"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://DESKTOP-QMF9D1U:8080/LaenutusWebApplication/LaenutusService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:laen="http://www.ttu.ee/idu0075/ws/laenutus">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <laen:getRaamatListRequest>\r
+         <laen:token>salajane</laen:token>\r
+         <!--Optional:-->\r
+         <laen:autor>J.K.Rowling</laen:autor>\r
+      </laen:getRaamatListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Simple Contains" id="7fb65a11-9347-4a77-bb32-a7348b3a7c36" name="Contains"><con:configuration><token>&lt;isbn>9780545010221&lt;/isbn>
+</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Schema Compliance" id="7615f67d-ec6d-44fc-a1e4-edd5ca450d49" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="SOAP Response" id="83872d54-0727-4041-9231-107d3e730f6f" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://www.ttu.ee/idu0075/ws/laenutus/LaenutusPortType/getRaamatListRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:loadTest id="a2db87b8-1b4c-494f-a7ae-835ed6370993" name="LoadTest 1"><con:settings><con:setting id="HttpSettings@close-connections">false</con:setting></con:settings><con:threadCount>5</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>60</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval></con:loadTest><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

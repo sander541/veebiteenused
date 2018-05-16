@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/C:/Users/annul/Desktop/Koolistuff/Veebiteenused/Projekt/LaenutusService.wsdl" uri="src/conf/xml-resources/web-services/LaenutusWebServiceFromWSDL/wsdl/LaenutusService.wsdl"/>
+</catalog>
