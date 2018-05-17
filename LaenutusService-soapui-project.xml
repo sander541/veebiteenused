@@ -353,7 +353,7 @@
    <soapenv:Body>\r
       <laen:getRaamatRequest>\r
          <laen:token>salajane</laen:token>\r
-         <laen:id>2</laen:id>\r
+         <laen:id>1</laen:id>\r
       </laen:getRaamatRequest>\r
    </soapenv:Body>\r
 </soapenv:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/ws/laenutus/LaenutusPortType/getRaamatRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="52e12c91-53df-4f2e-971f-4af5261144f6" isOneWay="false" action="" name="getRaamatList" bindingOperationName="getRaamatList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="87ab222b-1383-4f74-92db-3c77c76048e5" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://DESKTOP-QMF9D1U:8080/LaenutusWebApplication/LaenutusService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:laen="http://www.ttu.ee/idu0075/ws/laenutus">\r
@@ -425,7 +425,7 @@
    <soapenv:Body>\r
       <laen:getLaenutusRaamatListRequest>\r
          <laen:token>salajane</laen:token>\r
-         <laen:laenutusId>2</laen:laenutusId>\r
+         <laen:laenutusId>1</laen:laenutusId>\r
       </laen:getLaenutusRaamatListRequest>\r
    </soapenv:Body>\r
 </soapenv:Envelope>]]></con:request><con:assertion type="Simple Contains" id="d8f72898-6fd8-4591-ab5f-b6a011f30448" name="Contains"><con:configuration><token>&lt;isbn>9780545010221&lt;/isbn>

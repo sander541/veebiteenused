@@ -22,28 +22,19 @@ public class LaenutusApp {
      */
     public static void main(String[] args) {
         
-    boolean run=true;
-    while(run){
         Scanner obj=new Scanner(System.in);
-        System.out.println("Enter Operation number: \n"
+        System.out.println("Vali soovitud tegevuse number \n"
                 + "1. Lisa raamat\n"
-                + "2. Vaata raamatut\n"
-                + "3. Välju ");
+                + "2. Vaata raamatut");
         String operation=obj.next();
-        try{
-            int operationInt=Integer.parseInt(operation);
-            switch(operationInt){
-                case 1: addBook();
-                case 2: getBook();
-                case 3: run=false;
-            }
-
+        int operationInt=Integer.parseInt(operation);
+        if(operationInt == 1){
+            addBook();
         }
-        catch(Exception ex){
-            run=false;
-            return;
-            }
-        }
+        if(operationInt == 2){
+        getBook();
+    }
+        else System.out.println("sisestatud vale väärtus");
     }
 
     private static RaamatType getRaamat(ee.ttu.idu0075.ws.laenutus.GetRaamatRequest parameter) {
